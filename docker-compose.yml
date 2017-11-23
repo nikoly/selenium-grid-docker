@@ -1,0 +1,50 @@
+version: '2'
+services:
+
+  selenium_hub:
+    image: selenium/hub
+    networks:
+      robottestsnw: {}
+    ports:
+      - "4444:4444"
+
+  firefoxnode:
+    image: selenium/node-firefox
+    networks:
+      robottestsnw: {}
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=selenium_hub
+      - HUB_PORT_4444_TCP_PORT=4444
+
+  chromenode:
+    image: selenium/node-chrome
+    networks:
+      robottestsnw: {}
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=selenium_hub
+      - HUB_PORT_4444_TCP_PORT=4444
+    ports:
+      - 5555
+
+  app:
+    build: app/.
+    networks:
+      robottestsnw: {}
+    ports:
+      - "80"
+
+  robottests:
+    networks:
+      robottestsnw: {}
+    depends_on:
+      - selenium_hub
+      - chromenode
+      - firefoxnode
+      - app
+    build: testui/.
+    volumes:
+      - {WORKSPACE}/reports:/frontend-integration-tests/reports
+
+networks:
+  robottestsnw:
+    driver: bridge
