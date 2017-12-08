@@ -6,7 +6,7 @@ services:
     networks:
       robottestsnw: {}
     ports:
-      - "4444:4444"
+      - "4444"
 
   firefoxnode:
     image: selenium/node-firefox
@@ -34,6 +34,8 @@ services:
       - "80"
 
   robottests:
+    command: [
+      "robot", "-d", "reports", "--variablefile", "variables/config.py", "--variable", "BROWSER:chrome", "tests/"]
     networks:
       robottestsnw: {}
     depends_on:
@@ -43,7 +45,7 @@ services:
       - app
     build: testui/.
     volumes:
-      - {WORKSPACE}/reports:/frontend-integration-tests/reports
+      - ./reports:/frontend-integration-tests/reports
 
 networks:
   robottestsnw:
