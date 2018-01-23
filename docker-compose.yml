@@ -2,6 +2,7 @@ version: '2'
 services:
 
   selenium_hub:
+    container_name: selenium_hub
     image: selenium/hub
     networks:
       robottestsnw: {}
@@ -9,6 +10,7 @@ services:
       - "4444"
 
   firefoxnode:
+    container_name: firefox_node
     image: selenium/node-firefox
     networks:
       robottestsnw: {}
@@ -17,6 +19,7 @@ services:
       - HUB_PORT_4444_TCP_PORT=4444
 
   chromenode:
+    container_name: chrome_node
     image: selenium/node-chrome
     networks:
       robottestsnw: {}
@@ -27,6 +30,7 @@ services:
       - 5555
 
   app:
+    container_name: my_app
     build: app/.
     networks:
       robottestsnw: {}
@@ -34,8 +38,8 @@ services:
       - "80"
 
   robottests:
-    command: [
-      "robot", "-d", "reports", "--variablefile", "variables/config.py", "--variable", "BROWSER:chrome", "tests/"]
+    container_name: app_ui_tests
+    command: /bin/sleep infinity
     networks:
       robottestsnw: {}
     depends_on:
