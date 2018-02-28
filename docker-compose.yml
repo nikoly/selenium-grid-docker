@@ -17,6 +17,8 @@ services:
     environment:
       - HUB_PORT_4444_TCP_ADDR=selenium_hub
       - HUB_PORT_4444_TCP_PORT=4444
+    ports:
+      - 5554
 
   chromenode:
     container_name: chrome_node
@@ -30,15 +32,15 @@ services:
       - 5555
 
   app:
-    container_name: my_app
+    container_name: demo_app
     build: app/.
     networks:
       robottestsnw: {}
     ports:
-      - "80"
+      - 80
 
   robottests:
-    container_name: app_ui_tests
+    container_name: demo_app_selenium_tests
     command: /bin/sleep infinity
     networks:
       robottestsnw: {}
