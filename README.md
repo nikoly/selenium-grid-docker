@@ -55,7 +55,7 @@ The command will build, create and run Docker containers as specified in the doc
 
 To run the tests, please, execute one-off command in `robottests` container:
 
-    docker-compose -p my_unique_project run -t 15 chromenode:5555 -- robottests robot -d reports  --variablefile variables/config.py  --variable BROWSER:chrome tests/
+    docker-compose -p my_unique_project run robottests -t 15 chromenode:5555 -- robot -d reports  --variablefile variables/config.py  --variable BROWSER:chrome tests/
 
 Clean the environment
 

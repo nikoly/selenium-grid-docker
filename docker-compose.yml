@@ -40,7 +40,7 @@ services:
       - 80
 
   robottests:
-    container_name: demo_app_selenium_tests
+    container_name: demo_selenium_tests
     command: /bin/sleep infinity
     networks:
       robottestsnw: {}
