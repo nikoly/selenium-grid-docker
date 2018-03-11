@@ -49,13 +49,13 @@ See a README in `app/` to find out how to run the app. The app is there only to 
 
 Use `docker-compose` command to run the setup.
 
-    docker-compose -p my_unique_project up -d
+    docker-compose -p my_unique_project up -d --build
 
 The command will build, create and run Docker containers as specified in the docker-compose file.
 
 To run the tests, please, execute one-off command in `robottests` container:
 
-    docker-compose -p my_unique_project run robottests -t 15 chromenode:5555 -- robot -d reports  --variablefile variables/config.py  --variable BROWSER:chrome tests/
+    docker-compose -p my_unique_project exec robottests ./wait-for-it.sh -t 15 selenium_hub:4444 -- robot -d reports  --variablefile variables/config.py  --variable BROWSER:chrome tests/
 
 Clean the environment
 
