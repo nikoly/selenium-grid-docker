@@ -17,6 +17,8 @@ services:
     environment:
       - HUB_PORT_4444_TCP_ADDR=selenium_hub
       - HUB_PORT_4444_TCP_PORT=4444
+    depends_on:
+      - selenium_hub
     ports:
       - 5554
 
@@ -28,6 +30,8 @@ services:
     environment:
       - HUB_PORT_4444_TCP_ADDR=selenium_hub
       - HUB_PORT_4444_TCP_PORT=4444
+    depends_on:
+      - selenium_hub
     ports:
       - 5555
 
@@ -46,8 +50,6 @@ services:
       robottestsnw: {}
     depends_on:
       - selenium_hub
-      - chromenode
-      - firefoxnode
       - app
     build: testui/.
     volumes:

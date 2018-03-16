@@ -108,3 +108,5 @@ Clean the environment
     Before executing the Selenium tests, it's necessary to make sure that the test runner can create a Selenium Grid Session with a given webdriver. It means that Selenium Grid or Selenium Chrome Node should be **up** and **ready**.
 
     `wait-for-it.sh` script provides you with an opportunity to wait for the service to be up but not ready. To find out if the service is ready, please, check [this](wait-for-it.sh) out.
+
+    An example with a smoke tests to check if a Selenium service is ready is available [here](https://github.com/SeleniumHQ/docker-selenium/blob/3.6.0-americium/tests/SmokeTests/__init__.py#L20).
